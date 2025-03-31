@@ -1,141 +1,171 @@
+<!-- original : https://codepen.io/SeanNorton/pen/LWBXQL -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Bebas+Neue" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Mode Greeting</title>
+    <title>greeting2</title>
+
     <style>
-        body {
-            line-height: 1.6;
-            transition: background 0.3s, color 0.3s;
-        }
 
-        body.light-mode {
-            background-color: #fff;
-            color: #000;
-        }
+        /*CSS RESETS*/
 
-        body.dark-mode {
-            background-color: #121212;
-            color: #fff;
-        }
+body{
+    background-color: #121212;
+    line-height: 1.6;
 
-        .full-table {
-            display: table;
-            height: 100vh;
-            width: 100%;
-        }
+}
 
-        .table-cell {
-            display: table-cell;
-            vertical-align: middle;
-            text-align: center;
-        }
+h1 {
+    margin-top: 0;
+}
 
-        .card {
-            padding: 10px 25px;
-            border-radius: 10px;
-            background: #1C3A4D;
-            color: #fff;
-            display: inline-block;
-            box-shadow: 2px 2px 1px 0px #330835;
-        }
 
-        .card:hover {
-            margin-top: 2px;
-            box-shadow: none;
-        }
+/*CSS START*/
 
-        .clock, .date, .greet {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 2em;
-        }
+.full-table {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
 
-        .toggle-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-            font-size: 1em;
-            background: #444;
-            color: white;
-            border-radius: 5px;
-        }
+.table-cell {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.card {
+    padding: 10px 25px 10px 25px;
+    border-radius: 10px;
+    background: #553c4e;
+    width: 85vw;
+    color: #fff;
+    display: inline-block;
+    box-shadow: 2px 2px 1px 0px #330835;
+}
+
+.card:hover {
+    margin-top: 2px;
+    box-shadow: none;
+}
+
+.clock {
+    display: inline;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2em;
+   
+}
+
+.time {
+    display: inline;
+    min-width: 37px;
+}
+
+.colon {
+    font-size: 1.1em;
+    display: inline-block;
+}
+
+.date {
+    display: inline;
+    min-width: 162px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2em;
+    padding-right: 30px;
+}
+.greet{
+    
+    display:inline;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+     padding-right: 30px;
+}
+
     </style>
 </head>
 <body>
-    <button class="toggle-button" onclick="toggleMode()">Toggle Mode</button>
-    <div class="full-table">
-        <div class="table-cell">
-            <div class="card">
-                <div class="greet" id="greet"></div>
-                <div class="date" id="date"></div>
-                <div class="clock">
-                    <span id="hour"></span>:<span id="min"></span>:<span id="sec"></span>
-                </div>
-            </div>
-        </div>
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto:400,700" rel="stylesheet">
+
+<div class="full-table">
+  <div class="table-cell">
+    
+    <div class="card">
+        <div class="greet" id="greet"></div>
+      <div class="date" id="date"></div>
+      <div class="clock">
+        <div class="time" id="hour"></div>
+        <div class="colon">:</div>
+        <div class="time" id="min"></div>
+        <div class="colon">:</div>
+        <div class="time" id="sec"></div>
+      </div>
     </div>
+    
+  </div>
+</div>
 
-    <script>
-        function date() {
-            document.getElementById('date').innerHTML = new Date().toDateString();
-        }
+<script>
+    function date() {
+var today = new Date();
+document.getElementById('date').innerHTML = today.toDateString();
+}
 
-        function clock() {
-            var today = new Date();
-            var hour = formatTime(twelveHour(today.getHours()));
-            var minutes = formatTime(today.getMinutes());
-            var seconds = formatTime(today.getSeconds());
-            var period = today.getHours() >= 12 ? ' PM' : ' AM';
-            
-            var hrs = today.getHours();
-            var greet;
-            if (hrs < 12) greet = 'Good Morning Kenneth';
-            else if (hrs >= 12 && hrs <= 17) greet = 'Good Afternoon Kenneth';
-            else greet = 'Good Evening Kenneth';
-            
-            document.getElementById('greet').innerHTML = greet;
-            document.getElementById('hour').innerHTML = hour;
-            document.getElementById('min').innerHTML = minutes;
-            document.getElementById('sec').innerHTML = seconds + period;
-        }
 
-        function twelveHour(hour) {
-            return hour % 12 || 12;
-        }
+function clock() {
+var today = new Date();
+var hour = zeros(twelveHour(today.getHours()));
+var minutes = zeros(today.getMinutes());
+var seconds = zeros(today.getSeconds());
+if(today.getHours() >=12){
+    seconds+=" pm"
+}
+else{
+    seconds+=" am"
+}
+hrs = today.getHours();
+if (hrs < 12)
+        greet = 'Good Morning  ';
+    else if (hrs >= 12 && hrs <= 17)
+        greet = 'Good Afternoon ';
+    else if (hrs >= 17 && hrs <= 24)
+        greet = 'Good Evening  ';
+// console.log(today.toLocaleTimeString());
+document.getElementById('greet').innerHTML = greet;
+document.getElementById('hour').innerHTML = hour;
+document.getElementById('min').innerHTML = minutes;
+document.getElementById('sec').innerHTML = seconds;
+}
 
-        function formatTime(num) {
-            return num < 10 ? '0' + num : num;
-        }
+function twelveHour(hour) {
+if (hour > 12) {
+    return hour -= 12 
+} else if (hour === 0) {
+    return hour = 12;
+} else {
+    return hour
+}
+}
+    
+// adds zero infront of single digit number
+function zeros(num) {
+if (num < 10) {
+    num = '0' + num
+};
+return num;
+}
 
-        function dateTime() {
-            date();
-            clock();
-            setTimeout(dateTime, 1000);
-        }
+function dateTime() {
+date();
+clock();
+setTimeout(dateTime, 500);
+}
 
-        function toggleMode() {
-            document.body.classList.toggle('dark-mode');
-            document.body.classList.toggle('light-mode');
-            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-        }
+dateTime()
+// END
+</script>
 
-        // Auto-detect user's system preference
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                document.body.classList.add(savedTheme === 'dark' ? 'dark-mode' : 'light-mode');
-            } else {
-                document.body.classList.add(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark-mode' : 'light-mode');
-            }
-        }
-
-        loadTheme();
-        dateTime();
-    </script>
 </body>
 </html>
